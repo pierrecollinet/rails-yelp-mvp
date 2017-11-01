@@ -11,7 +11,11 @@ class ReviewsController < ApplicationController
     @review.rating = params["review"]["rating"].to_i
     @review.restaurant = @restaurant
     @review.save
-    redirect_to restaurant_path(@restaurant)
+    if @review.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      render :new
+    end
   end
 
   private
